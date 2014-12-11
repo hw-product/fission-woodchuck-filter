@@ -45,9 +45,11 @@ module Fission
         if(result.size > 1)
           error "Multiple status match detected within #{message}. Not tagging (matched: #{result.inspect})"
         elsif(result.size == 1)
-          payload.get(:data, :woodchuck, :entry, :tags).push(
-            result.first.downcase.to_sym
-          ).uniq!
+          payload.set(:data, :woodchuck, :entry, :tags,
+            payload.get(:data, :woodchuck, :entry, :tags).push(
+              result.first.downcase.to_sym
+            ).uniq
+          )
         end
         true
       end
