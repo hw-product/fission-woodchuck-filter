@@ -10,5 +10,5 @@ Gem::Specification.new do |s|
   s.description = 'Fission Log Entry Filter'
   s.require_path = 'lib'
   s.add_dependency 'fission'
-  s.files = Dir['**/*']
+  s.files = Dir['{lib}/**/**/*'] + %w(fission-woodchuck-filter.gemspec README.md CHANGELOG.md)
 end
