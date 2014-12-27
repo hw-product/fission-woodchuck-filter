@@ -5,7 +5,7 @@ module Fission
     class Filter < Fission::Callback
 
       # Valid filters
-      FILTERS = [:status_tagger]
+      FILTERS = [:status_tagger, :prefix_removal]
       # Valid status tag strings
       STATUS_TAGS = %w(DEBUG INFO WARN ERROR FATAL)
 
@@ -51,6 +51,15 @@ module Fission
             ).uniq
           )
         end
+        true
+      end
+
+      # Remove status and stamp prefix
+      #
+      # @param payload [Smash]
+      # @return [TrueClass]
+      def prefix_removal(payload)
+        payload.get(:data, :woodchuck, :entry, :content).sub!(/^\d+[^:]+ /, '')
         true
       end
 
